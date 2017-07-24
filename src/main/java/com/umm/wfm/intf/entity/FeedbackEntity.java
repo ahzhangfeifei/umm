@@ -2,11 +2,7 @@ package com.umm.wfm.intf.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.util.Date;
 
 /**

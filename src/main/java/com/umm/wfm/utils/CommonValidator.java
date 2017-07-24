@@ -8,11 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by wangshiqi on 2017/7/10.

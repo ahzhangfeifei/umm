@@ -1,10 +1,10 @@
 package com.umm.wfm.utils;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by makun on 2017/6/16.

@@ -1,7 +1,7 @@
 package com.umm.wfm.service.res;
 
-import com.umm.wfm.intf.tsp.dto.res.ResDistrict;
 import com.umm.ats.core.courier.AbstractCourier;
+import com.umm.wfm.intf.tsp.dto.res.ResDistrict;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

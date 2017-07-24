@@ -1,7 +1,7 @@
 package com.umm.wfm.base.rest.codec;
 
-import com.umm.wfm.base.rest.RestCodec;
 import com.umm.ats.core.utils.KryoWrapper;
+import com.umm.wfm.base.rest.RestCodec;
 
 /**
  * kryo codec
