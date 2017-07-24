@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!-- 线程池方式异步执行工具 -->
+    <bean id="asyncTaskManager" class="com.umm.ats.core.taskpool.AsyncTaskManager">
+        <property name="asyncTaskDynamicConfiguration" ref="asyncTaskDynamicConfiguration"/>
+    </bean>
+    <bean id="asyncTaskDynamicConfiguration" class="com.umm.ats.core.taskpool.AsyncTaskDynamicConfiguration" />
+    <bean id="asyncExecutorDynamicConfiguration" class="com.umm.ats.core.asyncexecutor.AsyncExecutorDynamicConfiguration"/>
+
+    <!-- 单线程异步执行工具 -->
+    <bean id="asyncQueuedExecutor" class="com.umm.ats.core.asyncexecutor.AsyncQueuedExecutor">
+        <!-- property name="asyncQueuedStatusListener" ref="asyncQueuedStatusLogger"/-->
+    </bean>
+    <!--<bean id="updateHitCountHandler" class="com.umm.avd.service.av.UpdateHitCountHandler">-->
+        <!--<property name="threadName" value="Redis命中计数" />-->
+        <!--<property name="type" value="0" />&lt;!&ndash; 队列类型：0=先进先出，1=先进后出&ndash;&gt;-->
+        <!--<property name="batch" value="true"/>-->
+        <!--<property name="supportClass" value="UpdateHitCountRequest" />-->
+        <!--<property name="alertInterval" value="300000" />&lt;!&ndash; 警告间隔时间，默认值5分钟 &ndash;&gt;-->
+        <!--<property name="batchSize" value="500" />&lt;!&ndash; 批量执行数量，默认值500 &ndash;&gt;-->
+        <!--<property name="queueSize" value="30000" />&lt;!&ndash; 缓冲队列大小，默认值10000 &ndash;&gt;-->
+        <!--<property name="alertQueueThreshold" value="5000" />&lt;!&ndash; 警告阈值，默认缓冲队列大小的1半 &ndash;&gt;-->
+        <!--<property name="exceptionWhenQueueFull" value="false" />&lt;!&ndash; 队列满后是否抛错，默认false &ndash;&gt;-->
+        <!--<property name="batchWaitSec" value="1" />&lt;!&ndash; 达到batchSize前最多等待时间也执行批量操作，默认1秒 &ndash;&gt;-->
+        <!--<property name="emailAlert" value="false" />&lt;!&ndash; 是否邮件告警， 默认false &ndash;&gt;-->
+        <!--<property name="emailTo" value="" />&lt;!&ndash; 邮件告警收件人列表 &ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--<bean id="updateResHandler" class="com.umm.avd.service.av.res.UpdateResHandler">-->
+        <!--<property name="threadName" value="通知资源更新余位" />-->
+        <!--<property name="type" value="0" />-->
+        <!--<property name="batch" value="false"/>-->
+        <!--<property name="supportClass" value="com.umm.avd.intf.tsp.dto.res.FltSeatStatus" />-->
+        <!--<property name="exceptionWhenQueueFull" value="false" />-->
+        <!--<property name="trace" value="true"/>-->
+    <!-- 任务模块并行处理线程池配置 -->
+    <bean id="memberDbExecutor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数 -->
+        <property name="corePoolSize" value="10" />
+        <!-- 最大线程数 -->
+        <property name="maxPoolSize" value="100" />
+        <!-- 队列最大长度 >=mainExecutor.maxSize -->
+        <property name="queueCapacity" value="10000" />
+        <!-- 线程池维护线程所允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="300" />
+        <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor$AbortPolicy" />
+        </property>
+    </bean>
+
+    <!--日志过滤异步化处理线程池-->
+    <bean id="asynLogFilterExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="threadNamePrefix" value="asynLogFilterExecutor-"/>
+        <property name="corePoolSize" value="100"/>
+        <property name="maxPoolSize" value="1000"/>
+        <property name="queueCapacity" value="10000"/>
+        <property name="keepAliveSeconds" value="30"/>
+    </bean>
+
+</beans>

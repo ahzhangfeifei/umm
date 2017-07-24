@@ -1,0 +1,39 @@
+<ehcache>
+    <!--
+    本地缓存使用ehcache + spring cache，这里是ehcache的cache配置。
+    -->
+    <diskStore path="java.io.tmpdir"/>
+    <cache name="def"
+           timeToLiveSeconds="3600"
+           maxElementsInMemory="1000000"
+           eternal="false">
+        <cacheDecoratorFactory class="com.umm.ats.core.cache.support.BlockingCacheDecoratorFactory" />
+    </cache>
+
+    <cache name="oneDay_district"
+           timeToLiveSeconds="86400"
+           maxElementsInMemory="1000000"
+           eternal="false">
+        <cacheDecoratorFactory class="com.umm.ats.core.cache.support.BlockingCacheDecoratorFactory" />
+    </cache>
+    <cache name="oneDay_traffices"
+           timeToLiveSeconds="86400"
+           maxElementsInMemory="1000000"
+           eternal="false">
+        <cacheDecoratorFactory class="com.umm.ats.core.cache.support.BlockingCacheDecoratorFactory" />
+    </cache>
+    <cache name="oneDay_airline_company"
+           timeToLiveSeconds="86400"
+           maxElementsInMemory="1000000"
+           eternal="false">
+        <cacheDecoratorFactory class="com.umm.ats.core.cache.support.BlockingCacheDecoratorFactory" />
+    </cache>
+    <cache name="oneDay_airport"
+           timeToLiveSeconds="86400"
+           maxElementsInMemory="1000000"
+           eternal="false">
+        <cacheDecoratorFactory class="com.umm.ats.core.cache.support.BlockingCacheDecoratorFactory" />
+    </cache>
+
+
+</ehcache>

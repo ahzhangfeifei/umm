@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <!-- http://tsp.test.umm.org/PLA/TSG/index.html TSP注册监控地址 -->
+
+    <!-- 用于获取Spring的ApplicationContext 不要修改 -->
+    <bean class="com.umm.operation.platform.tsg.client.common.AppContext"/>
+
+    <bean id="monitor" class="com.umm.operation.platform.tsg.monitor.Monitor" destroy-method="stop">
+        <property name="brokerURL"
+                  value="failover://${tsp.broker.address}?randomize=false&amp;jms.useAsyncSend=true"/>
+        <property name="queueName" value="queue.pla.tsp.monitor.log"/>
+    </bean>
+
+    <!-- 服务方 -->
+    <bean id="registerConfig"
+          class="com.umm.operation.platform.tsg.client.config.RegisterConfig">
+        <property name="registryAddress" value="${tsp.registry.address}"/>
+    </bean>
+
+    <bean id="providerConfig"
+          class="com.umm.operation.platform.tsg.client.config.ProviderConfig">
+        <property name="subSystem" value="${tsp.project.subName}"/>
+        <property name="packageName" value="${tsp.project.contextPath}"/>
+        <property name="maintainer" value="${tsp.project.maintainer}"/>
+        <property name="isScan" value="true"/>
+    </bean>
+
+    <!-- 扩展消费服务配置，找到所有TspInterface的实现进行填充。通用的tsp客户端接口定义 -->
+    <bean id="tspClientScannerConfigurer" class="com.umm.ats.core.tsp.TspClientScannerConfigurer">
+        <property name="basePackage" value="com.umm.wfm.intf.tsp"/>
+    </bean>
+
+    <bean id="tspCommonClient" class="com.umm.ats.core.tsp.client.WrappedTspCommonClient"
+          destroy-method="stop">
+        <property name="consumerConfig" ref="tspClientScannerConfigurer"/>
+        <property name="providerConfig" ref="providerConfig"/>
+        <property name="registerConfig" ref="registerConfig"/>
+        <property name="clientConnectTimeout" value="60000"/>
+        <property name="clientSocketTimeout" value="60000"/>
+    </bean>
+
+    <bean id="atsTspClient" class="com.umm.ats.core.tsp.client.AtsTspClient">
+        <property name="client" ref="tspCommonClient"/>
+        <property name="sys" value="${application.name}"/>
+        <property name="tspConf">
+            <bean class="com.umm.ats.core.tsp.client.impl.DefaultTspConf"/>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.1.xsd
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+    <!-- broker -->
+    <bean id="commonFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL"
+                  value="failover://(tcp://10.10.30.44:61611)?randomize=false&amp;jms.useAsyncSend=true&amp;jms.prefetchPolicy.queuePrefetch=1">
+        </property>
+    </bean>
+
+    <!-- send -->
+    <bean id="poolSendConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory" ref="commonFactory" />
+        <property name="maximumActive" value="1" />
+    </bean>
+
+
+    <bean id="cfmTicketQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="queue.cfm.ticketOrder.update" />
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="poolSendConnectionFactory" />
+        <property name="defaultDestinationName" value="queue.cfm.ticketOrder.update" />
+        <property name="deliveryPersistent" value="true" />
+        <property name="pubSubDomain" value="false" />
+        <property name="explicitQosEnabled" value="true" />
+        <property name="timeToLive" value="604800000" />
+    </bean>
+
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+    <logger name="com.umm.core.tracer">
+        <level value="info"/>
+    </logger>
+    <logger name="com.umm.ngsp.ddg">
+        <level value="warn"/>
+    </logger>
+    <logger name="com.umm.operation.platform.tsg">
+        <level value="error"/>
+    </logger>
+    <logger name="org.springframework.transaction">
+        <level value="info"/>
+    </logger>
+    <logger name="org.apache.curator">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.apache.zookeeper">
+        <level value="warn"/>
+    </logger>
+    <logger name="com.umm.zkconfig">
+        <level value="info"/>
+    </logger>
+    <logger name="com.umm">
+        <level value="debug"/>
+    </logger>
+    <root level="WARN">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

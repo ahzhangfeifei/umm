@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator />
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>/opt/umm/logs/tomcat/app/${tomcat_app_base}/wfm.log
+        </File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/opt/umm/logs/tomcat/app/${tomcat_app_base}/pdl_wfm.%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>200MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout>
+            <Pattern> %-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n  </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.umm.wfm">
+        <level value="debug"/>
+    </logger>
+    <logger name="com.umm.ats.core">
+        <level value="debug"/>
+    </logger>
+    <logger name="com.umm.core">
+        <level value="info"/>
+    </logger>
+
+    <logger name="com.umm.wfm.mapper">
+        <level value="info"/>
+    </logger>
+
+    <root level="WARN">
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

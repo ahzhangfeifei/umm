@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator />
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/umm/logs/tomcat/app/${tomcat_app_base}/wfm.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="TRACER" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/umm/logs/tomcat/app/${tomcat_app_base}/pdl_wfm_tracer.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="IO" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/umm/logs/tomcat/app/${tomcat_app_base}/pdl_wfm_io.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>90</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="FILE" />
+    </appender>
+    <appender name="TRACER_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>90</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="TRACER" />
+    </appender>
+    <appender name="IO_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>90</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="IO" />
+    </appender>
+
+    <logger name="com.umm.core.tracer" level="INFO" additivity="false">
+        <appender-ref ref="TRACER_ASYNC"/>
+    </logger>
+    <logger name="com.umm.core.tspTracer" level="info" additivity="false">
+        <appender-ref ref="TSP_ASYNC" />
+    </logger>
+    <logger name="com.umm.core.ioTracer" level="info" additivity="false">
+        <appender-ref ref="IO_ASYNC" />
+    </logger>
+
+    <logger name="com.umm.wfm">
+        <level value="info"/>
+    </logger>
+    <logger name="com.umm.ats.core">
+        <level value="info"/>
+    </logger>
+    <root level="WARN">
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <!-- 网关相关 -->
+<!--
+    <bean class="com.umm.adapter.common.init.VendorConfigChangeEvent" depends-on="loadVendorConfig"/>
+
+    <dubbo:application name="${application.name}" />
+
+    <dubbo:monitor protocol="registry"/>
+
+    &lt;!&ndash;关闭所有服务的启动时检查：(没有提供者时报错)&ndash;&gt;
+    <dubbo:consumer check="false" timeout="${connector.dubbo.timeout}" retries="0"/>
+
+    <dubbo:registry protocol="zookeeper" address="${connector.zookeeper.url}"/>
+
+    <bean id="loadVendorConfig"
+          class="com.umm.adapter.common.init.VendorConfig" init-method="load">
+    </bean>
+
+    <dubbo:reference id="ctripDConnector" interface="com.umm.flight.connector.ctrip.ICtripDConnector" group="${connector.zookeeper.group}" filter="ctripdatacompress" />
+
+    <bean id="ctripDConnectorClient" class="com.umm.flight.connector.client.ctrip.CtripDConnectorClient">
+        <property name="iCtripDConnector" ref="ctripDConnector"/>
+    </bean>
+
+    <dubbo:reference id="ibePlusDConnector" interface="com.umm.flight.connector.ibeplus.IIbePlusDConnector" group="${connector.zookeeper.group}" filter="ibeplusdatacompress"/>
+
+    <bean id="ibePlusDConnectorClient" class="com.umm.flight.connector.client.ibeplus.IbePlusDConnectorClient">
+        <property name="iIbePlusDConnector" ref="ibePlusDConnector"/>
+    </bean>
+
+    <dubbo:reference id="ibeDConnector" interface="com.umm.flight.connector.ibe.IIbeDConnector" group="${connector.zookeeper.group}"  filter="ibedatatrace"/>
+
+    <bean id="ibeDConnectorClient" class="com.umm.flight.connector.client.ibe.IbeDConnectorClient">
+        <property name="iIbeDConnector" ref="ibeDConnector"/>
+    </bean>
+
+    <dubbo:reference id="ecHttpConnector" interface="com.umm.flight.connector.ec.EcHttpConnector" group="${connector.zookeeper.group}"  filter="ecdatatrace"/>
+-->
+
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="readWriteDbRoute"/>
+        <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionTemplateAdapter" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="jdbcTemplateAdapter" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="readWriteDbRoute" />
+    </bean>
+
+    <bean id="readWriteDbRoute" class="com.umm.ats.core.db.ReadWriteDbRoute">
+        <property name="writeDb" ref="PDL_WFM-WFM-MASTER-DB"/>
+        <property name="readDbs">
+            <list>
+                <ref bean="PDL_WFM-WFM-MASTER-DB"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="readWriteDbRoute"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.umm.wfm.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="properties">
+            <value>mappers=tk.mybatis.mapper.common.Mapper,tk.mybatis.mapper.common.MySqlMapper</value>
+        </property>
+    </bean>
+
+</beans>

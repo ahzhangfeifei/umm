@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--<bean id="avdTracerInfoInjector" class="com.umm.avd.base.tracer.AvdTracerInfoInjector"/>-->
+
+    <bean id="jmsTracerHelper" class="com.umm.ats.core.tracer.jms.JmsTracerHelper"/>
+
+    <bean id="logResultFilter" class="com.umm.ats.core.tracer.LogResultFilter" />
+
+    <bean id="tracerProcessor" class="com.umm.ats.core.tracer.TracerProcessor">
+        <!--<property name="tracerInfoInjector" ref="avdTracerInfoInjector"/>-->
+        <property name="logResultFilter" ref="logResultFilter"/>
+    </bean>
+
+    <bean id="actionTracerInterceptor" class="com.umm.ats.core.tracer.interceptor.ActionTracerInterceptor"/>
+
+    <bean id="commandTracerInterceptor" class="com.umm.ats.core.tracer.interceptor.CommandTracerInterceptor"/>
+
+    <bean id="forScheduleInterceptor" class="com.umm.ats.core.tracer.interceptor.ForScheduleInterceptor" />
+
+    <!--<bean id="ibeConnectorTracerInterceptor" class="com.umm.ats.core.tracer.interceptor.IbeConnectorTracerInterceptor"/>-->
+
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="ibeConnectorTracerPointCut" expression="execution(* com.umm.avd.service.travelsky.ibe.IbeInterfaceService.*(..)))"/>-->
+        <!--<aop:aspect id="ibeConnectorTracerAspect" ref="ibeConnectorTracerInterceptor">-->
+            <!--<aop:around pointcut-ref="ibeConnectorTracerPointCut" method="aroundIbeCall"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+</beans>

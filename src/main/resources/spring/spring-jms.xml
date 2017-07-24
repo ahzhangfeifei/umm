@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="commonFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+        <!--<property name="brokerURL"-->
+                  <!--value="failover://${broker.address}?randomize=false&amp;jms.useAsyncSend=true">-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="clientIdGenerator" class="com.umm.ats.core.utils.AMQClientIdGenerator">-->
+        <!--<constructor-arg index="0" value="001" />-->
+    <!--</bean>-->
+
+    <!--<bean id="cachingConnectionFactory"-->
+          <!--class="org.springframework.jms.connection.CachingConnectionFactory">-->
+        <!--<property name="targetConnectionFactory" ref="commonFactory" />-->
+        <!--<property name="sessionCacheSize" value="10" />-->
+        <!--<property name="clientId">-->
+            <!--<bean-->
+                    <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+                <!--<property name="targetObject" ref="clientIdGenerator" />-->
+                <!--<property name="targetMethod" value="getClientId" />-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
+        <!--<property name="connectionFactory" ref="cachingConnectionFactory" />-->
+        <!--<property name="deliveryPersistent" value="false" />-->
+        <!--<property name="pubSubDomain" value="false" />-->
+        <!--<property name="explicitQosEnabled" value="true" />-->
+        <!--<property name="timeToLive" value="604800000" />-->
+    <!--</bean>-->
+
+    <!--<bean id="courierTopic" class="org.apache.activemq.command.ActiveMQTopic">-->
+        <!--<constructor-arg index="0" value="topic.ats.bic.courier" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 消息订阅快递 &ndash;&gt;-->
+    <!--<bean id="jmsCourierHandler" class="com.umm.ats.core.courier.support.JmsCourierHandler">-->
+        <!--<property name="jmsTemplate" ref="jmsTemplate" />-->
+        <!--<property name="destination" ref="courierTopic" />-->
+    <!--</bean>-->
+    <!--<bean id="courierHandlerManager" class="com.umm.ats.core.courier.CourierHandlerManager">-->
+        <!--<property name="courierHandler" ref="jmsCourierHandler" />-->
+    <!--</bean>-->
+
+    <!--<bean id="cabinClassListener" class="com.umm.ase.jms.CabinClassListener" />-->
+
+    <!--<jms:listener-container destination-type="topic"-->
+                            <!--container-type="default" concurrency="1" connection-factory="cachingConnectionFactory">-->
+        <!--<jms:listener destination="topic.aft.cabinclass.update" ref="cabinClassListener" />-->
+        <!--<jms:listener destination="topic.ats.bic.courier" ref="jmsCourierHandler" />-->
+        <!--<jms:listener destination="topic.aft.luggage.change" ref="luggageChangeListener" />-->
+    <!--</jms:listener-container>-->
+
+    <!--<jms:listener-container destination-type="queue"-->
+                            <!--container-type="default" concurrency="1" connection-factory="cachingConnectionFactory">-->
+        <!--<jms:listener destination="queue.adt.ofprice.save"-->
+                      <!--ref="saveOfficialPriceTask" />-->
+    <!--</jms:listener-container>-->
+
+    <!--<bean id="lpeSendQueryResultDestination" class="org.apache.activemq.command.ActiveMQQueue">-->
+        <!--<constructor-arg index="0" value="queue.lpe.queryData.save"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 查询结果通过mq推送到lpe &ndash;&gt;-->
+    <!--<bean id="lpeJmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
+        <!--<property name="connectionFactory" ref="cachingConnectionFactory" />-->
+        <!--<property name="deliveryPersistent" value="false" />-->
+        <!--<property name="pubSubDomain" value="false" />-->
+        <!--<property name="explicitQosEnabled" value="true" />-->
+        <!--<property name="timeToLive" value="604800000" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 查询结果通过mq推送到ata &ndash;&gt;-->
+    <!--<bean id="ataJmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
+        <!--<property name="connectionFactory" ref="cachingConnectionFactory" />-->
+        <!--<property name="defaultDestinationName" value="$[jms.ata.queryData.queue]"/>-->
+        <!--<property name="deliveryPersistent" value="false" />-->
+        <!--<property name="pubSubDomain" value="false" />-->
+        <!--<property name="explicitQosEnabled" value="true" />-->
+        <!--<property name="timeToLive" value="604800000" />-->
+    <!--</bean>-->
+
+</beans>

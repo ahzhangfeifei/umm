@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+       <!-- TSP传输加解密安全服务 -->
+       <!--<bean id="tspSecurity" class="com.umm.finance.base.security.service.AESBeanSecurityServiceFactory">
+              <property name="key" value="1234567890123456" />
+              <property name="iv" value="abcdefghijklmn11" />
+       </bean>-->
+
+       <!-- RSA秘钥加载器 -->
+       <bean id="rsaKeysLoader" class="com.umm.finance.base.security.service.KeyStoreFileRSAKeysLoader">
+              <property name="path" value="${security.rsaKeyStore.path}" />                       <!-- keystore 文件路径-->
+              <property name="storePassword" value="${security.rsaKeyStore.storePassword}" /> 	  <!-- keystore 访问密码-->
+              <property name="alias" value="${security.rsaKeyStore.alias}" /> 					  <!-- 秘钥条目昵称-->
+              <property name="keyPassword" value="${security.rsaKeyStore.keyPassword}" /> 		  <!-- 私钥访问密码-->
+       </bean>
+
+       <!-- PCI-DSS 安全存储服务 -->
+       <bean id="pciSecurity" class="com.umm.finance.base.security.service.PCIBeanSecurityServiceFactory">
+              <property name="rsaKeysLoader"  ref="rsaKeysLoader" /><!-- 以keystore文件的方式加载公私钥 -->
+              <property name="keysLoader" ref="wfmKeysLoader" />	<!-- 自定义加载对称秘钥的逻辑，并且对称秘钥都是以非对称加密的密文形式加载 -->
+       </bean>
+
+       <!-- MyBATIS安全插件配置 -->
+       <bean id="beanSecurityPlugin" class="com.umm.finance.base.security.mybatis.BeanSecurityPlugin" >
+              <property name="securityService" ref="pciSecurity" />
+       </bean>
+
+       <bean class="com.umm.finance.base.security.mybatis.SecurityPluginBeanPostProcessor" >
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+
+</beans>
