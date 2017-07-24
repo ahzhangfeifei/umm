@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.*;
 
 /**
  * Created by wangshiqi on 2017/7/10.

@@ -28,5 +28,4 @@
             <!--<aop:around pointcut-ref="ibeConnectorTracerPointCut" method="aroundIbeCall"/>-->
         <!--</aop:aspect>-->
     <!--</aop:config>-->
-
 </beans>

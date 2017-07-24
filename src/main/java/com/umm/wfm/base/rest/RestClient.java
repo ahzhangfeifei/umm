@@ -1,7 +1,6 @@
 package com.umm.wfm.base.rest;
 
 import com.umm.ats.core.tracer.annotation.CommandTrace;
-import com.umm.wfm.base.tracer.AtsTraceCmd;
 import com.umm.wfm.intf.constants.BizzEx;
 import com.umm.wfm.intf.exception.BizzException;
 import com.umm.wfm.security.log.LogUtil;

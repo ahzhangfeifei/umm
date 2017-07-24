@@ -11,14 +11,13 @@
 
 
     <context:component-scan base-package="com.umm.wfm"/>
-    <context:component-scan base-package="com.umm.operation.platform.llt"/>
 
     <context:annotation-config/>
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- rest client -->
-    <bean id="ummRestClient" class="com.umm.wfm.base.rest.ummRestClient"/>
+    <bean id="ummRestClient" class="com.umm.wfm.base.rest.RestClient"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
@@ -58,7 +57,7 @@
     <!-- hystrix 动态配置项目支持 -->
     <bean id="hystrixDynamicConfiguration" class="com.umm.ats.core.hystrix.HystrixDynamicConfiguration"/>
 
-    <!-- 机票配置中心 -->
+    <!-- 配置中心 -->
     <import resource="classpath:zookeeper-client-config.xml"/>
 
     <!-- 支持配置中心修改日志级别 -->

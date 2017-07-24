@@ -101,19 +101,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
     <dependencies>
-        <dependency>
-            <groupId>com.umm.wfm.base</groupId>
-            <artifactId>security</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.ats</groupId>
-            <artifactId>ats-core</artifactId>
-            <version>${ats-util-version}</version>
-        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -184,12 +172,6 @@
             <version>1.5.2</version>
         </dependency>
 
-        <dependency><!-- 机票配置中心 -->
-            <groupId>com.umm.config</groupId>
-            <artifactId>zkconfig-client</artifactId>
-            <version>1.4</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -208,62 +190,6 @@
             <version>2.2.1</version>
         </dependency>
 
-        <!-- platform base lib -->
-        <dependency>
-            <groupId>com.umm.ngsp.ddg</groupId>
-            <artifactId>ddg-client</artifactId>
-            <version>2.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform.hogwarts</groupId>
-            <artifactId>restfulapi</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-codec</artifactId>
-            <version>0.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform.base</groupId>
-            <artifactId>base-datetime</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-io</artifactId>
-            <version>0.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-http</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-json</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-common</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-dblog</artifactId>
-            <version>0.9.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-text</artifactId>
-            <version>0.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>base-amq</artifactId>
-            <version>0.0.2</version>
-        </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
@@ -671,17 +597,6 @@
             <version>1.1.0.Final</version>
         </dependency>
         <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>tsp-client</artifactId>
-            <version>1.4.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-jms</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.3</version>
@@ -722,28 +637,6 @@
             <artifactId>ehcache</artifactId>
             <version>2.10.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.umm.flight</groupId>
-            <artifactId>connector-client</artifactId>
-            <version>${connector-base-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.flight</groupId>
-            <artifactId>connector-base</artifactId>
-            <version>${connector-base-version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.umm.operation.platform</groupId>
-                    <artifactId>llt-client</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.umm.operation.platform</groupId>
-            <artifactId>llt-client</artifactId>
-            <version>0.2.6</version>
-        </dependency>
-
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>
