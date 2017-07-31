@@ -28,7 +28,7 @@
         </property>
     </bean>
 
-    <bean id="configProperties1"
+ <!--   <bean id="configProperties1"
           class="com.umm.zkconfig.client.boot.ReloadablePropertySourcesPlaceholderConfigurer"
           parent="abstractReloadablePlaceholderConfigurer">
         <property name="nullValue" value="@null"/>
@@ -46,22 +46,22 @@
         </property>
         <property name="propertyMetaRegistry" ref="propertyMetaRegistry"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
-    </bean>
+    </bean>-->
 
     <!-- ddg -->
-    <bean id="configProperties2" class="com.umm.ngsp.ddg.configurer.DiamondPropertyConfigurer">
+<!--    <bean id="configProperties2" class="com.umm.ngsp.ddg.configurer.DiamondPropertyConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="placeholderPrefix" value="${"/>
-    </bean>
+    </bean>-->
 
     <!-- hystrix 动态配置项目支持 -->
-    <bean id="hystrixDynamicConfiguration" class="com.umm.ats.core.hystrix.HystrixDynamicConfiguration"/>
+<!--    <bean id="hystrixDynamicConfiguration" class="com.umm.ats.core.hystrix.HystrixDynamicConfiguration"/>-->
 
     <!-- 配置中心 -->
-    <import resource="classpath:zookeeper-client-config.xml"/>
+<!--    <import resource="classpath:zookeeper-client-config.xml"/>-->
 
     <!-- 支持配置中心修改日志级别 -->
-    <bean class="com.umm.ats.core.log.LogbackDynamicSetter"/>
+<!--    <bean class="com.umm.ats.core.log.LogbackDynamicSetter"/>-->
 
     <!-- spring bean validator -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -74,8 +74,8 @@
     <!-- MBeans -->
     <context:mbean-export default-domain="com.umm.wfm" registration="replaceExisting"/>
 
-    <!-- 注入HystrixCommandAspect这个类，才可以使用 HystrixCommand 这个注解 -->
+<!--    &lt;!&ndash; 注入HystrixCommandAspect这个类，才可以使用 HystrixCommand 这个注解 &ndash;&gt;
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <bean name="hystrixCommandAspect" class="com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"/>
+    <bean name="hystrixCommandAspect" class="com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"/>-->
 
 </beans>

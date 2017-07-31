@@ -9,27 +9,27 @@
               <property name="iv" value="abcdefghijklmn11" />
        </bean>-->
 
-       <!-- RSA秘钥加载器 -->
+ <!--      &lt;!&ndash; RSA秘钥加载器 &ndash;&gt;
        <bean id="rsaKeysLoader" class="com.umm.finance.base.security.service.KeyStoreFileRSAKeysLoader">
-              <property name="path" value="${security.rsaKeyStore.path}" />                       <!-- keystore 文件路径-->
-              <property name="storePassword" value="${security.rsaKeyStore.storePassword}" /> 	  <!-- keystore 访问密码-->
-              <property name="alias" value="${security.rsaKeyStore.alias}" /> 					  <!-- 秘钥条目昵称-->
-              <property name="keyPassword" value="${security.rsaKeyStore.keyPassword}" /> 		  <!-- 私钥访问密码-->
+              <property name="path" value="${security.rsaKeyStore.path}" />                       &lt;!&ndash; keystore 文件路径&ndash;&gt;
+              <property name="storePassword" value="${security.rsaKeyStore.storePassword}" /> 	  &lt;!&ndash; keystore 访问密码&ndash;&gt;
+              <property name="alias" value="${security.rsaKeyStore.alias}" /> 					  &lt;!&ndash; 秘钥条目昵称&ndash;&gt;
+              <property name="keyPassword" value="${security.rsaKeyStore.keyPassword}" /> 		  &lt;!&ndash; 私钥访问密码&ndash;&gt;
        </bean>
 
-       <!-- PCI-DSS 安全存储服务 -->
+       &lt;!&ndash; PCI-DSS 安全存储服务 &ndash;&gt;
        <bean id="pciSecurity" class="com.umm.finance.base.security.service.PCIBeanSecurityServiceFactory">
-              <property name="rsaKeysLoader"  ref="rsaKeysLoader" /><!-- 以keystore文件的方式加载公私钥 -->
-              <property name="keysLoader" ref="wfmKeysLoader" />	<!-- 自定义加载对称秘钥的逻辑，并且对称秘钥都是以非对称加密的密文形式加载 -->
+              <property name="rsaKeysLoader"  ref="rsaKeysLoader" />&lt;!&ndash; 以keystore文件的方式加载公私钥 &ndash;&gt;
+              <property name="keysLoader" ref="wfmKeysLoader" />	&lt;!&ndash; 自定义加载对称秘钥的逻辑，并且对称秘钥都是以非对称加密的密文形式加载 &ndash;&gt;
        </bean>
 
-       <!-- MyBATIS安全插件配置 -->
+       &lt;!&ndash; MyBATIS安全插件配置 &ndash;&gt;
        <bean id="beanSecurityPlugin" class="com.umm.finance.base.security.mybatis.BeanSecurityPlugin" >
               <property name="securityService" ref="pciSecurity" />
        </bean>
 
        <bean class="com.umm.finance.base.security.mybatis.SecurityPluginBeanPostProcessor" >
               <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-       </bean>
+       </bean>-->
 
 </beans>

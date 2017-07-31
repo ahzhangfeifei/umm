@@ -4,16 +4,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
     <!-- 线程池方式异步执行工具 -->
-    <bean id="asyncTaskManager" class="com.umm.ats.core.taskpool.AsyncTaskManager">
+   <!-- <bean id="asyncTaskManager" class="com.umm.ats.core.taskpool.AsyncTaskManager">
         <property name="asyncTaskDynamicConfiguration" ref="asyncTaskDynamicConfiguration"/>
     </bean>
     <bean id="asyncTaskDynamicConfiguration" class="com.umm.ats.core.taskpool.AsyncTaskDynamicConfiguration" />
     <bean id="asyncExecutorDynamicConfiguration" class="com.umm.ats.core.asyncexecutor.AsyncExecutorDynamicConfiguration"/>
 
-    <!-- 单线程异步执行工具 -->
+    &lt;!&ndash; 单线程异步执行工具 &ndash;&gt;
     <bean id="asyncQueuedExecutor" class="com.umm.ats.core.asyncexecutor.AsyncQueuedExecutor">
-        <!-- property name="asyncQueuedStatusListener" ref="asyncQueuedStatusLogger"/-->
-    </bean>
+        &lt;!&ndash; property name="asyncQueuedStatusListener" ref="asyncQueuedStatusLogger"/&ndash;&gt;
+    </bean>-->
     <!--<bean id="updateHitCountHandler" class="com.umm.avd.service.av.UpdateHitCountHandler">-->
         <!--<property name="threadName" value="Redis命中计数" />-->
         <!--<property name="type" value="0" />&lt;!&ndash; 队列类型：0=先进先出，1=先进后出&ndash;&gt;-->

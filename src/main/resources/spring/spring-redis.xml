@@ -30,8 +30,8 @@
         <property name="jmxNamePrefix" value="JedisPool"/>
     </bean>
 
-    <bean id="jedisTemplate" class="com.umm.ats.core.redis.JedisTemplate">
+    <!-- <bean id="jedisTemplate" class="com.umm.ats.core.redis.JedisTemplate">
         <constructor-arg index="0" ref="jedisPool"/>
-    </bean>
+    </bean>-->
 
 </beans>

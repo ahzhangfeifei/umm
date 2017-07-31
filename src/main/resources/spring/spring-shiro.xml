@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+ <!--   <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
         <property name="failureUrl" value="/error.jsp"/>
     </bean>
 
@@ -16,7 +16,7 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl"
                   value="https://cas-sso.umm.org:8443/cas/login?service=http://localhost:8080/shiro-cas"/>
-        <!--上边设置测试的CAS地址和你自己的回调地址，如果是正式环境，则为https://sso2.umm.org/cas?service=http://your/service/shiro-cas-->
+        &lt;!&ndash;上边设置测试的CAS地址和你自己的回调地址，如果是正式环境，则为https://sso2.umm.org/cas?service=http://your/service/shiro-cas&ndash;&gt;
 
         <property name="filters">
             <map>
@@ -28,7 +28,7 @@
             <value>
                 /shiro-cas = casFilter
                 /manage/** = roles[ROLE_USER]
-                <!-- 上边设置需要验证的url -->
+                &lt;!&ndash; 上边设置需要验证的url &ndash;&gt;
                 /** = anon
             </value>
         </property>
@@ -37,9 +37,9 @@
     <bean id="casRealm" class="org.apache.shiro.cas.CasRealm">
         <property name="defaultRoles" value="ROLE_USER"/>
         <property name="casServerUrlPrefix" value="https://cas-sso.umm.org:8443/cas/"/>
-        <!-- 上边为测试环境的设置，正式环境参照上边开头的配置 -->
+        &lt;!&ndash; 上边为测试环境的设置，正式环境参照上边开头的配置 &ndash;&gt;
         <property name="casService" value="http://localhost:8080/shiro-cas"/>
-        <!-- 跟上边开头的一致 -->
+        &lt;!&ndash; 跟上边开头的一致 &ndash;&gt;
     </bean>
 
     <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
@@ -67,6 +67,6 @@
     </bean>
 
     <bean name="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager">
-    </bean>
+    </bean>-->
 
 </beans>

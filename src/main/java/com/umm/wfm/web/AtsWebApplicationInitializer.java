@@ -5,7 +5,6 @@ import ch.qos.logback.classic.joran.JoranConfigurator;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
-import com.umm.ats.core.tracer.datashare.DataSharedFilter;
 import com.umm.wfm.security.log.LogUtil;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.*;
@@ -57,9 +56,9 @@ public class AtsWebApplicationInitializer implements WebApplicationInitializer {
         container.addListener(ContextLoaderListener.class);
 
         // thread data share filter
-        container.addFilter("DataSharedFilter", DataSharedFilter.class)
-                .addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST),
-                        true, "dispatcher");
+//        container.addFilter("DataSharedFilter", DataSharedFilter.class)
+//                .addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST),
+//                        true, "dispatcher");
 
         // character encoding filter
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
